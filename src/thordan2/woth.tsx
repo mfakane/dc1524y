@@ -17,7 +17,7 @@ type SecondaryTargetKind =
 type TargetKind = PrimaryTargetKind | SecondaryTargetKind;
 
 const generate = (playerCount: number, continuation: string) => {
-  const prefix = playerCount === 1 ? "/e " : "/p ";
+  const prefix = playerCount === 1 ? "/e" : "/p";
   const primaryBag = new RandomBag<PrimaryTargetKind>([
     "skywardLeap",
     "spiralPierce1",
@@ -63,36 +63,48 @@ const generate = (playerCount: number, continuation: string) => {
   };
 
   return [
-    `${prefix}騎神トールダンは「至天の陣：風槍」の構え。<se.3> <wait.4>
-${prefix}騎神トールダンの「至天の陣：風槍」 <se.3> <wait.6>
-${playerTarget("skywardLeap", (x) => `/mk circle ${x}`)}
+    `${prefix} 騎神トールダンは「至天の陣：風槍」の構え。<se.3> <wait.4>
+${prefix} 騎神トールダンの「至天の陣：風槍」 <se.3> <wait.6>
+${playerTarget(
+  "skywardLeap",
+  (x) => `/mk circle ${x}`,
+  `${prefix} (スカイワードリープ マーカー付与)`
+)}
 ${playerTarget("spiralPierce1", (x) => `/mk bind1 ${x}`)}
-${playerTarget("spiralPierce2", (x) => `/mk bind2 ${x} <wait.5>`, "/wait 5")}
+${playerTarget(
+  "spiralPierce2",
+  (x) => `/mk bind2 ${x} <wait.5>`,
+  `${prefix} (スパイラルピアス マーカー付与) <wait.5>`
+)}
 ${playerTarget("thunderStruck1", (x) => `/mk stop1 ${x}`)}
-${playerTarget("thunderStruck1", (x) => `/mk stop2 ${x} <wait.2>`, "/wait 2")}
+${playerTarget(
+  "thunderStruck1",
+  (x) => `/mk stop2 ${x} <wait.2>`,
+  `${prefix} (サンダーウィング デバフ付与) <wait.2>`
+)}
 /mk off <circle>
 /mk off <bind1>
 /mk off <bind2>
 ${playerTarget("cauterize", (x) => `/mk triangle ${x}`)}
-${prefix}ヴェズルフェルニルの「ツイスターダイブ」 <se.5> <wait.6>
+${prefix} ヴェズルフェルニルの「ツイスターダイブ」 <se.5> <wait.6>
 /mk off <triangle>
-${prefix}騎神トールダンの「レベレーション・アスカロンメルシー」 <se.4>
+${prefix} 騎神トールダンの「レベレーション・アスカロンメルシー」 <se.4>
 ${continuation}`,
     `${playerTarget("liquidHeaven", (x) => `/mk attack4 ${x}`)}
 ${playerTarget("altarFlare", (x) => `/mk attack3 ${x}`)}
-${prefix}ヘヴンリキッド (1), アルターフレア (1) <se.3> <wait.1>
+${prefix} ヘヴンリキッド (1), アルターフレア (1) <se.3> <wait.1>
 ${playerTarget("liquidHeaven", (x) => `/mk attack3 ${x}`)}
 ${playerTarget("altarFlare", (x) => `/mk attack2 ${x}`)}
-${prefix}ヘヴンリキッド (2), アルターフレア (2) <se.3> <wait.1>
+${prefix} ヘヴンリキッド (2), アルターフレア (2) <se.3> <wait.1>
 ${playerTarget("liquidHeaven", (x) => `/mk attack2 ${x}`)}
 ${playerTarget("altarFlare", (x) => `/mk attack1 ${x}`)}
-${prefix}ヘヴンリキッド (3), アルターフレア (3) <se.3> <wait.1>
+${prefix} ヘヴンリキッド (3), アルターフレア (3) <se.3> <wait.1>
 ${playerTarget("liquidHeaven", (x) => `/mk attack1 ${x}`)}
 ${playerTarget("altarFlare", (x) => `/mk off ${x}`)}
-${prefix}ヘヴンリキッド (4), アルターフレア (4) <se.3> <wait.1>
+${prefix} ヘヴンリキッド (4), アルターフレア (4) <se.3> <wait.1>
 ${playerTarget("liquidHeaven", (x) => `/mk off ${x}`)}
-${prefix}ヘヴンリキッド (5) <se.3> <wait.1>
-${prefix}聖騎士グリノーの「エンプティディメンション」 <se.4>`,
+${prefix} ヘヴンリキッド (5) <se.3> <wait.1>
+${prefix} 聖騎士グリノーの「エンプティディメンション」 <se.4>`,
   ];
 };
 
