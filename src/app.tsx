@@ -1,6 +1,7 @@
 import { Fragment, FunctionComponent } from "preact";
 import { useState } from "preact/hooks";
-import WrathOfTheHeavens from "./thordan2/woth/woth";
+import DeathOfTheHeavens from "./thordan2/doth";
+import WrathOfTheHeavens from "./thordan2/woth";
 
 type Phase = "woth" | "doth";
 
@@ -18,7 +19,7 @@ export const App: FunctionComponent = () => {
         <option value={"doth" as Phase}>至天の陣：死刻</option>
       </select>
       {phase === "woth" && <WrathOfTheHeavens />}
-      {phase === "doth" && <p>まだないよ</p>}
+      {phase === "doth" && <DeathOfTheHeavens />}
     </Fragment>
   );
 };

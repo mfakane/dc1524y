@@ -1,6 +1,7 @@
 import { FunctionComponent } from "preact";
 import { useState } from "preact/hooks";
-import RandomBag from "../../randomBag.js";
+import RandomBag from "@/randomBag.js";
+import Marker from "@/marker.js";
 
 type PrimaryTargetKind =
   | "skywardLeap"
@@ -13,24 +14,8 @@ type SecondaryTargetKind =
   | "thunderStruck"
   | undefined;
 type TargetKind = PrimaryTargetKind | SecondaryTargetKind;
-type Marker =
-  | "circle"
-  | "triangle"
-  | "square"
-  | "plus"
-  | "attack1"
-  | "attack2"
-  | "attack3"
-  | "attack4"
-  | "attack5"
-  | "bind1"
-  | "bind2"
-  | "bind3"
-  | "stop1"
-  | "stop2"
-  | "off";
 
-const generate = () => {
+const generate = (prefix: string, continuation: string) => {
   const primaryBag = new RandomBag<PrimaryTargetKind>([
     "skywardLeap",
     "spiralPierce",
@@ -86,8 +71,8 @@ const generate = () => {
 
   return [
     `
-騎神トールダンは「至天の陣：風槍」の構え。<se.3> <wait.4>
-騎神トールダンの「至天の陣：風槍」 <se.3> <wait.6>
+${prefix}騎神トールダンは「至天の陣：風槍」の構え。<se.3> <wait.4>
+${prefix}騎神トールダンの「至天の陣：風槍」 <se.3> <wait.6>
 /mk circle ${playersByMarker.get("circle")}
 /mk bind1 ${playersByMarker.get("bind1")}
 /mk bind2 ${playersByMarker.get("bind2")} <wait.5>
@@ -97,41 +82,62 @@ const generate = () => {
 /mk off <bind1>
 /mk off <bind2>
 /mk triangle ${playersByMarker.get("triangle")}
-ヴェズルフェルニルの「ツイスターダイブ」 <se.5> <wait.6>
+${prefix}ヴェズルフェルニルの「ツイスターダイブ」 <se.5> <wait.6>
 /mk off <triangle>
-騎神トールダンの「レベレーション・アスカロンメルシー」 <se.4>
+${prefix}騎神トールダンの「レベレーション・アスカロンメルシー」 <se.4>
+${continuation}
 `.trim(),
     `
 /mk attack3 ${playersByMarker.get("attack3")}
 /mk attack4 ${playersByMarker.get("attack4")}
-ヘヴンリキッド (1), アルターフレア (1) <se.3> <wait.1>
+${prefix}ヘヴンリキッド (1), アルターフレア (1) <se.3> <wait.1>
 /mk attack2 <attack3>
 /mk attack3 <attack4>
-ヘヴンリキッド (2), アルターフレア (2) <se.3> <wait.1>
+${prefix}ヘヴンリキッド (2), アルターフレア (2) <se.3> <wait.1>
 /mk attack1 <attack2>
 /mk attack2 <attack3>
-ヘヴンリキッド (3), アルターフレア (3) <se.3> <wait.1>
+${prefix}ヘヴンリキッド (3), アルターフレア (3) <se.3> <wait.1>
 /mk off <attack1>
 /mk attack1 <attack2>
-ヘヴンリキッド (4), アルターフレア (4) <se.3> <wait.1>
+${prefix}ヘヴンリキッド (4), アルターフレア (4) <se.3> <wait.1>
 /mk off <attack1>
-ヘヴンリキッド (5) <se.3> <wait.1>
-聖騎士グリノーの「エンプティディメンション」 <se.4>`.trim(),
+${prefix}ヘヴンリキッド (5) <se.3> <wait.1>
+${prefix}聖騎士グリノーの「エンプティディメンション」 <se.4>`.trim(),
   ];
 };
 
 const WrathOfTheHeavens: FunctionComponent = () => {
-  const [text, setText] = useState(generate());
+  const [prefix, setPrefix] = useState("/p ");
+  const [continuation, setContinuation] = useState("/e 次のマクロへ！ <se.7>");
+  const [text, setText] = useState(generate(prefix, continuation));
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <p>
-        <button onClick={() => setText(generate())}>生成</button>
+        チャットコマンド:{" "}
+        <select
+          value={prefix}
+          onChange={(e) => setPrefix(e.currentTarget.value)}
+        >
+          <option value="/p ">/p </option>
+          <option value="/e ">/e </option>
+        </select>
+        <br />
+        マクロ継続通知:{" "}
+        <input
+          value={continuation}
+          autocomplete="off"
+          onChange={(e) => setContinuation(e.currentTarget.value)}
+        />
+        <br />
+        <button onClick={() => setText(generate(prefix, continuation))}>
+          生成
+        </button>
       </p>
-      <textarea readonly rows={15} cols={60}>
+      <textarea readonly rows={15} cols={80}>
         {text[0]}
       </textarea>
       <br />
-      <textarea readonly rows={15} cols={60}>
+      <textarea readonly rows={15} cols={80}>
         {text[1]}
       </textarea>
     </form>
