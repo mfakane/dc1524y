@@ -11,6 +11,12 @@ export const App: FunctionComponent = () => {
   return (
     <Fragment>
       <h1>絶竜詩戦争: 練習マクロガチャ</h1>
+      <p>
+        練習したいフェーズを選択してください。邂逅編 4
+        などに突入して使える、練習用マクロを生成します。
+        <br />
+        生成ボタンを押すたびにマクロ中のランダム要素が入れ替わります。
+      </p>
       <select
         value={phase}
         onChange={(e) => setPhase(e.currentTarget.value as Phase)}
