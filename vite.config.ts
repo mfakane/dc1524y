@@ -5,9 +5,6 @@ import type { UserConfig } from "vite";
 const config: UserConfig = {
   base: "",
   plugins: [preact()],
-  build: {
-    outDir: resolve("docs"),
-  },
   esbuild: {
     logOverride: { "this-is-undefined-in-esm": "silent" },
   },
