@@ -144,7 +144,7 @@ const WrathOfTheHeavens: FunctionComponent = () => {
       {text.map((x) => (
         <>
           <textarea readonly rows={15} cols={80}>
-            {x}
+            {x.replace(/\n\n+/g, "\n").trim()}
           </textarea>
           <br />
         </>
