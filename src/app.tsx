@@ -1,12 +1,22 @@
 import { Fragment, FunctionComponent } from "preact";
-import { useState } from "preact/hooks";
+import { useState, useEffect } from "preact/hooks";
 import DeathOfTheHeavens from "./thordan2/doth";
 import WrathOfTheHeavens from "./thordan2/woth";
 
 type Phase = "woth" | "doth";
 
 export const App: FunctionComponent = () => {
-  const [phase, setPhase] = useState<Phase>("woth");
+  const [phase, setPhase] = useState<Phase>(
+    (location.hash || "woth").replace(/^#/, "") as Phase
+  );
+
+  useEffect(() => {
+    const onHashChange = (ev: HashChangeEvent) =>
+      setPhase((location.hash || "woth").replace(/^#/, "") as Phase);
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => window.removeEventListener("hashchange", onHashChange);
+  });
 
   return (
     <Fragment>
