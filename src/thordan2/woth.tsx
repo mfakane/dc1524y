@@ -78,7 +78,7 @@ ${playerTarget(
 )}
 ${playerTarget("thunderStruck1", (x) => `/mk stop1 ${x}`)}
 ${playerTarget(
-  "thunderStruck1",
+  "thunderStruck2",
   (x) => `/mk stop2 ${x} <wait.2>`,
   `${prefix} (サンダーウィング デバフ付与) <wait.2>`
 )}
