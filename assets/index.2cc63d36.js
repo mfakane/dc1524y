@@ -20,7 +20,7 @@ ${n("skywardLeap",_=>`/mk circle ${_}`,`${t} (\u30B9\u30AB\u30A4\u30EF\u30FC\u30
 ${n("spiralPierce1",_=>`/mk bind1 ${_}`)}
 ${n("spiralPierce2",_=>`/mk bind2 ${_} <wait.5>`,`${t} (\u30B9\u30D1\u30A4\u30E9\u30EB\u30D4\u30A2\u30B9 \u30DE\u30FC\u30AB\u30FC\u4ED8\u4E0E) <wait.5>`)}
 ${n("thunderStruck1",_=>`/mk stop1 ${_}`)}
-${n("thunderStruck1",_=>`/mk stop2 ${_} <wait.2>`,`${t} (\u30B5\u30F3\u30C0\u30FC\u30A6\u30A3\u30F3\u30B0 \u30C7\u30D0\u30D5\u4ED8\u4E0E) <wait.2>`)}
+${n("thunderStruck2",_=>`/mk stop2 ${_} <wait.2>`,`${t} (\u30B5\u30F3\u30C0\u30FC\u30A6\u30A3\u30F3\u30B0 \u30C7\u30D0\u30D5\u4ED8\u4E0E) <wait.2>`)}
 /mk off <circle>
 /mk off <bind1>
 /mk off <bind2>
